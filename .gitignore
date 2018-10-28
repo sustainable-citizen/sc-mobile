@@ -343,3 +343,7 @@ playground.xcworkspace
 
 # Build files
 build/
+
+Generated.xcconfig
+
+*.bin
