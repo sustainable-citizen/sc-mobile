@@ -31,80 +31,99 @@ class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixi
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.black,
-      body: new Stack(
-        fit: StackFit.expand,
+      appBar: AppBar(
+        title: Text('Sustainable Citizen'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: LoginForm()
+      ),
+    );
+  }
+}
+
+// Define a Custom Form Widget
+class LoginForm extends StatefulWidget {
+  @override
+  LoginFormState createState() {
+    return LoginFormState();
+  }
+}
+
+// Define a corresponding State class. This class will hold the data related to
+// the form.
+class LoginFormState extends State<LoginForm> {
+  // Create a global key that will uniquely identify the Form widget and allow
+  // us to validate the form
+  final _formKey = GlobalKey<FormState>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  // Validate will return true if the form is valid, or false if
+  // the form is invalid.
+  void attemptLogin() {
+    if (_formKey.currentState.validate()) {
+      // If the form is valid, we want to show a Snackbar
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            // Retrieve the text the user has typed in using our
+            // TextEditingController
+            content: Text(emailController.text),
+          );
+        },
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Build a Form widget using the _formKey we created above
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          new Image(
-            image: new AssetImage("assets/login_background.jpg"),
-            fit: BoxFit.cover,
-            color: Colors.black54,
-            colorBlendMode: BlendMode.darken,
+          TextFormField(
+            controller: emailController,
+            decoration: new InputDecoration(
+              labelText: "Email",
+            ),
+            keyboardType: TextInputType.emailAddress,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter an email address';
+              }
+            },
           ),
-          new Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget> [
-              new Text(
-                'Sustainable Citizen',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 40.0,
-                ),
-              ),
-              new Form(
-                child: new Theme (
-                  data: new ThemeData (
-                    brightness: Brightness.dark,
-                    primarySwatch: Colors.green,
-                    inputDecorationTheme: new InputDecorationTheme(
-                      labelStyle: new TextStyle (
-                        color: Colors.white,
-                        fontSize: 20.0
-                      )
-                    )
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.all(40.0),
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget> [
-                        new TextFormField(
-                          decoration: new InputDecoration(
-                            labelText: "Email",
-                          ),
-                          keyboardType: TextInputType.emailAddress,
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(top: 10.0)
-                        ),
-                        new TextFormField(
-                          decoration: new InputDecoration(
-                            labelText: "Password",
-                          ),
-                          keyboardType: TextInputType.text,
-                          obscureText: true,
-                        ),
-                        new Padding(
-                          padding: const EdgeInsets.only(top: 50.0)
-                        ),
-                        new MaterialButton(
-                          color: Colors.white,
-                          splashColor: Colors.green,
-                          child: new Text(
-                            "Login",
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.black
-                            )
-                          ),
-                          onPressed: () => {},
-                        )
-                      ] 
-                    ),
-                  ),
-                ),
-              )
-            ]
+          TextFormField(
+            controller: passwordController,
+            decoration: new InputDecoration(
+              labelText: "Password",
+            ),
+            keyboardType: TextInputType.text,
+            obscureText: true,
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Please enter a password';
+              }
+            },
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            child: RaisedButton(
+              onPressed: attemptLogin,
+              child: Text('Login'),
+            ),
           )
         ],
       ),
