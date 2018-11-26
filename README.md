@@ -15,7 +15,7 @@ To learn more about fluter, check out this link: https://flutter.io/
 
 ## Installation 
 
-To get glutter installed on your machine, follow the appropriate steps found at the following link: https://flutter.io/get-started/install/
+To get flutter installed on your machine, follow the appropriate steps found at the following link: https://flutter.io/get-started/install/
 
 After this, ensure that you are working on the `beta` channel by typing the command `flutter channel`
 
