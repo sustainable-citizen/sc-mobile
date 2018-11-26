@@ -5,28 +5,7 @@ class LoginPage extends StatefulWidget {
   State createState() => new LoginPageState();
 }
 
-class LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin {
-  
-  AnimationController _iconAnimationController;
-  Animation<double> _iconAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    
-    _iconAnimationController = new AnimationController(
-      vsync: this,
-      duration: new Duration(milliseconds: 500)
-    );
-
-    _iconAnimation = new CurvedAnimation(
-      parent: _iconAnimationController,
-      curve: Curves.bounceOut
-    );
-
-    _iconAnimation.addListener(() => this.setState((){}));
-    _iconAnimationController.forward();
-  }
+class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
