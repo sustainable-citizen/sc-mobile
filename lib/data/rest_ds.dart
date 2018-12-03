@@ -25,7 +25,7 @@ class RestDatasource {
       print(result.toString());
       if (result["status_code"] == 401) {
         throw new Exception("You have entered an invalid username or password.");
-      } else if (result["status_code"] != 201) {
+      } else if (result["status_code"] != 200) {
         throw new Exception("An unexpected error has occurred.");
       }
       return User(username, password);
