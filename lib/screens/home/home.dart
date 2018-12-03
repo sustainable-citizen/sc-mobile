@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dashboard_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -7,7 +8,17 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
-  final List<Widget> _children = [];
+  final List<Widget> _children = [
+    DashboardWidget(Colors.blue),
+    DashboardWidget(Colors.deepOrange),
+    DashboardWidget(Colors.green)
+  ];
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +26,10 @@ class HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Sustainable Citizen'),
       ),
-      body: Center(
-        child: Text('Eventually there will be stuff here I swear...'),
-      ),
+      body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0, // this will be set when a new tab is tapped
+        onTap: onTabTapped,
+        currentIndex: _currentIndex, // this will be set when a new tab is tapped
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -30,9 +40,7 @@ class HomeScreenState extends State<HomeScreen> {
             title: Text('Challenges'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person), 
-            title: Text('Profile')
-          ),
+              icon: Icon(Icons.person), title: Text('Profile')),
         ],
       ),
     );
