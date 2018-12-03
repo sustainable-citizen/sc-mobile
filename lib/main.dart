@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'routes.dart';
 
 void main() => runApp(new MyApp());
 
@@ -9,10 +9,8 @@ class MyApp extends StatelessWidget {
     final appTitle = 'Sustainable Citizen';
     return new MaterialApp(
       title: appTitle,
-      home: new LoginPage(),
-      theme: new ThemeData(
-        primarySwatch: Colors.green
-      ),
+      theme: new ThemeData(primarySwatch: Colors.green),
+      routes: routes,
     );
   }
 }
