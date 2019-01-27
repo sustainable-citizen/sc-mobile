@@ -15,13 +15,14 @@ class RestDatasource {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-      }, 
+      },
       body: json.encode({
         "grant_type": grantType,
         "username": username,
         "password": password
-     }),
-    ).then((dynamic result) {
+      }),
+    )
+        .then((dynamic result) {
       print(result.toString());
       if (result["status_code"] == 401) {
         throw Exception("You have entered an invalid username or password.");

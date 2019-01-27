@@ -58,8 +58,7 @@ class LoginFormState extends State<LoginForm>
   }
 
   void _showSnackBar(String text) {
-    scaffoldKey.currentState
-        .showSnackBar( SnackBar(content: Text(text)));
+    scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(text)));
   }
 
   @override

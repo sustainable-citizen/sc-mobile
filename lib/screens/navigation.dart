@@ -28,7 +28,8 @@ class HomeScreenState extends State<HomeScreen> {
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
-        currentIndex: _currentIndex, // this will be set when a new tab is tapped
+        currentIndex:
+            _currentIndex, // this will be set when a new tab is tapped
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

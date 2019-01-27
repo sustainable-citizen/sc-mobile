@@ -19,14 +19,9 @@ class ChallengeScreenState extends State<ChallengeScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Challenges'),
-          bottom: TabBar(
-            tabs: [
-              Tab(text: "Active"),
-              Tab(text: "Completed")
-            ]
-          )
-        ),
+            title: Text('Challenges'),
+            bottom:
+                TabBar(tabs: [Tab(text: "Active"), Tab(text: "Completed")])),
         body: TabBarView(
           children: _pages,
         ),
