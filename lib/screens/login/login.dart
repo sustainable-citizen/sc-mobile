@@ -22,7 +22,7 @@ class LoginScreenState extends State<LoginScreen> {
   }
 }
 
-// Define a Custom Form Widget
+// The widget that contains the login form
 class LoginForm extends StatefulWidget {
   @override
   LoginFormState createState() {
@@ -77,6 +77,35 @@ class LoginFormState extends State<LoginForm>
       color: Colors.green,
     );
 
+    // The form feild where the email will be entered
+    var emailField = new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new TextFormField(
+        decoration: new InputDecoration(labelText: "Email"),
+        onSaved: (val) => _username = val,
+        validator: (val) {
+          return val.length == 0
+              ? "Please enter an email address"
+              : null;
+        },
+      ),
+    );
+
+    // The form feild where the password will be entered
+    var passwordFeild = new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new TextFormField(
+        decoration: new InputDecoration(labelText: "Password"),
+        onSaved: (val) => _password = val,
+        validator: (val) {
+          return val.length == 0
+              ? "Please enter an password"
+              : null;
+        },
+      ),
+    );
+
+    // The entire login form
     var loginForm = new Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -88,30 +117,8 @@ class LoginFormState extends State<LoginForm>
           key: _formKey,
           child: new Column(
             children: <Widget>[
-              new Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: new TextFormField(
-                  decoration: new InputDecoration(labelText: "Email"),
-                  onSaved: (val) => _username = val,
-                  validator: (val) {
-                    return val.length == 0
-                        ? "Please enter an email address"
-                        : null;
-                  },
-                ),
-              ),
-              new Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: new TextFormField(
-                  decoration: new InputDecoration(labelText: "Password"),
-                  onSaved: (val) => _password = val,
-                  validator: (val) {
-                    return val.length == 0
-                        ? "Please enter an password"
-                        : null;
-                  },
-                ),
-              ),
+              emailField,
+              passwordFeild, 
             ],
           ),
         ),
