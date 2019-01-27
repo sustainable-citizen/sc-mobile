@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../widgets/dashboard_widget.dart';
-
+import 'active.dart';
+import 'completed.dart';
 
 class ChallengeScreen extends StatefulWidget {
   @override
@@ -9,8 +9,8 @@ class ChallengeScreen extends StatefulWidget {
 
 class ChallengeScreenState extends State<ChallengeScreen> {
   final List<Widget> _pages = [
-    DashboardWidget(Colors.amber),
-    DashboardWidget(Colors.indigo)
+    ActiveChallengeWidget(),
+    CompletedChallengeWidget()
   ];
 
   @override
