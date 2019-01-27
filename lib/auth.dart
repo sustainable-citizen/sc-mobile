@@ -11,6 +11,7 @@ class AuthStateProvider {
   List<AuthStateListener> _subscribers;
 
   factory AuthStateProvider() => _instance;
+  
   AuthStateProvider.internal() {
     _subscribers = new List<AuthStateListener>();
     initState();
