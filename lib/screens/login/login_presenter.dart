@@ -15,7 +15,7 @@ class LoginPresenter {
     try {
       var user = await api.login(username, password);
       _view.onLoginSuccess(user);
-    } on Exception catch(error) {
+    } on Exception catch (error) {
       _view.onLoginError(error.toString());
     }
   }
