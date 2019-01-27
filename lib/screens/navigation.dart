@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dashboard_widget.dart';
+import '../widgets/dashboard_widget.dart';
+import 'challenges/challenges.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     DashboardWidget(Colors.blue),
-    DashboardWidget(Colors.deepOrange),
+    ChallengeScreen(),
     DashboardWidget(Colors.green)
   ];
 
@@ -23,9 +24,6 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Sustainable Citizen'),
-      ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,

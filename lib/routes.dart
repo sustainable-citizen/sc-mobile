@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home/home.dart';
+import 'screens/navigation.dart';
 import 'screens/login/login.dart';
 
 final routes = {
