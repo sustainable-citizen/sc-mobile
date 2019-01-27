@@ -4,7 +4,7 @@ import 'completed.dart';
 
 class ChallengeScreen extends StatefulWidget {
   @override
-  State createState() => new ChallengeScreenState();
+  State createState() => ChallengeScreenState();
 }
 
 class ChallengeScreenState extends State<ChallengeScreen> {
@@ -15,7 +15,7 @@ class ChallengeScreenState extends State<ChallengeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return new DefaultTabController(
+    return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
