@@ -17,8 +17,8 @@ To learn more about fluter, check out this link: https://flutter.io/
 
 To get flutter installed on your machine, follow the appropriate steps found at the following link: https://flutter.io/get-started/install/
 
-After this, ensure that you are working on the `beta` channel by typing the command `flutter channel`
+After this, ensure that you are working on the `stable` channel by typing the command `flutter channel`
 
-If you are currently on the `dev` or `master` channel, make sure you switch to the `beta` channel by entering the command `flutter channel beta`
+If you are currently on the `dev`, `master` or `beta` channel, make sure you switch to the `stable` channel by entering the command `flutter channel stable`
 
 You can then follow the following guide to get your IDE of choice set up: https://flutter.io/get-started/editor/#vscode
