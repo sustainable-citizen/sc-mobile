@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'routes.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appTitle = 'Sustainable Citizen';
-    return new MaterialApp(
+    return MaterialApp(
       title: appTitle,
-      theme: new ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(primarySwatch: Colors.green),
       routes: routes,
     );
   }

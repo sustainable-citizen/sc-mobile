@@ -13,7 +13,7 @@ class LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text('Sustainable Citizen'),
       ),
@@ -43,7 +43,7 @@ class LoginFormState extends State<LoginForm>
 
   LoginFormState() {
     _presenter = LoginPresenter(this);
-    var authStateProvider = new AuthStateProvider();
+    var authStateProvider = AuthStateProvider();
     authStateProvider.subscribe(this);
   }
 
@@ -59,7 +59,7 @@ class LoginFormState extends State<LoginForm>
 
   void _showSnackBar(String text) {
     scaffoldKey.currentState
-        .showSnackBar(new SnackBar(content: new Text(text)));
+        .showSnackBar( SnackBar(content: Text(text)));
   }
 
   @override
@@ -71,70 +71,63 @@ class LoginFormState extends State<LoginForm>
   @override
   Widget build(BuildContext context) {
     _context = context;
-    var loginButton = RaisedButton(
+
+    // The button which is pressed to attempt login
+    final loginButton = RaisedButton(
       onPressed: _submit,
       child: Text("Login"),
       color: Colors.green,
     );
 
     // The form feild where the email will be entered
-    var emailField = new Padding(
+    final emailField = Padding(
       padding: const EdgeInsets.all(8.0),
-      child: new TextFormField(
-        decoration: new InputDecoration(labelText: "Email"),
+      child: TextFormField(
+        decoration: InputDecoration(labelText: "Email"),
         onSaved: (val) => _username = val,
         validator: (val) {
-          return val.length == 0
-              ? "Please enter an email address"
-              : null;
+          return val.length == 0 ? "Please enter an email address" : null;
         },
       ),
     );
 
     // The form feild where the password will be entered
-    var passwordFeild = new Padding(
+    final passwordFeild = Padding(
       padding: const EdgeInsets.all(8.0),
-      child: new TextFormField(
-        decoration: new InputDecoration(labelText: "Password"),
+      child: TextFormField(
+        decoration: InputDecoration(labelText: "Password"),
         onSaved: (val) => _password = val,
         validator: (val) {
-          return val.length == 0
-              ? "Please enter an password"
-              : null;
+          return val.length == 0 ? "Please enter an password" : null;
         },
       ),
     );
 
     // The entire login form
-    var loginForm = new Column(
+    final loginForm = Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        new Text(
+        Text(
           "Login",
           textScaleFactor: 2.0,
         ),
-        new Form(
+        Form(
           key: _formKey,
-          child: new Column(
+          child: Column(
             children: <Widget>[
               emailField,
-              passwordFeild, 
+              passwordFeild,
             ],
           ),
         ),
         Padding(
             padding: EdgeInsets.symmetric(vertical: 16.0),
-            child: _isLoading ? new CircularProgressIndicator() : loginButton
-        ),
+            child: _isLoading ? CircularProgressIndicator() : loginButton),
       ],
     );
 
     // Build a Form widget using the _formKey we created above
-    return Scaffold(
-      appBar: null,
-      key: scaffoldKey,
-      body: loginForm
-    );
+    return Scaffold(appBar: null, key: scaffoldKey, body: loginForm);
   }
 
   @override
@@ -147,7 +140,7 @@ class LoginFormState extends State<LoginForm>
   void onLoginSuccess(User user) async {
     _showSnackBar(user.toString());
     setState(() => _isLoading = false);
-    var authStateProvider = new AuthStateProvider();
+    var authStateProvider = AuthStateProvider();
     authStateProvider.notify(AuthState.LOGGED_IN);
   }
 }

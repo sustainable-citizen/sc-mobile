@@ -6,13 +6,14 @@ abstract class AuthStateListener {
 
 // A naive implementation of Observer/Subscriber Pattern. Will do for now.
 class AuthStateProvider {
-  static final AuthStateProvider _instance = new AuthStateProvider.internal();
+  static final AuthStateProvider _instance = AuthStateProvider.internal();
 
   List<AuthStateListener> _subscribers;
 
   factory AuthStateProvider() => _instance;
+
   AuthStateProvider.internal() {
-    _subscribers = new List<AuthStateListener>();
+    _subscribers = List<AuthStateListener>();
     initState();
   }
 

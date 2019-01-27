@@ -8,7 +8,7 @@ abstract class LoginContract {
 
 class LoginPresenter {
   LoginContract _view;
-  RestDatasource api = new RestDatasource();
+  RestDatasource api = RestDatasource();
   LoginPresenter(this._view);
 
   attemptLogin(String username, String password) async {

@@ -5,7 +5,7 @@ import 'profile/profile.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
-  State createState() => new HomeScreenState();
+  State createState() => HomeScreenState();
 }
 
 class HomeScreenState extends State<HomeScreen> {
