@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
-class DashboardWidget extends StatelessWidget {
-  final Color color;
-
-  DashboardWidget(this.color);
+class CompletedChallengeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: color,
+      child: Text('Completed Challenges'),
     );
   }
 }

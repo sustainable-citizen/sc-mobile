@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../widgets/dashboard_widget.dart';
 import 'challenges/challenges.dart';
+import 'home/home.dart';
+import 'profile/profile.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,9 +11,9 @@ class HomeScreen extends StatefulWidget {
 class HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    DashboardWidget(Colors.blue),
+    HomeWidget(),
     ChallengeScreen(),
-    DashboardWidget(Colors.green)
+    ProfileWidget()
   ];
 
   void onTabTapped(int index) {
