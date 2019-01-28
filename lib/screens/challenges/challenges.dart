@@ -1,20 +1,36 @@
 import 'package:flutter/material.dart';
 import 'active.dart';
 import 'completed.dart';
+import '../../models/user.dart';
+import '../../models/user_challenge.dart';
+import '../../data/api.dart';
 
 class ChallengeScreen extends StatefulWidget {
+  final User user;
+
+  ChallengeScreen({Key key , this.user});
+
   @override
   State createState() => ChallengeScreenState();
 }
 
 class ChallengeScreenState extends State<ChallengeScreen> {
-  final List<Widget> _pages = [
-    ActiveChallengeWidget(),
-    CompletedChallengeWidget()
-  ];
+
+  RestDatasource _api = RestDatasource();
+  List<UserChallenge> userChallenges;
 
   @override
   Widget build(BuildContext context) {
+
+    _api.getUserChallenges(widget.user).then((challenges) {
+      userChallenges = challenges;
+    });
+
+    List<Widget> _pages = [
+      ActiveChallengeWidget(userChallenges: this.userChallenges),
+      CompletedChallengeWidget()
+    ];
+
     return DefaultTabController(
       length: 2,
       child: Scaffold(
