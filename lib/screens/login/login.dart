@@ -11,6 +11,10 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+
+    //answer from
+    // https://stackoverflow.com/questions/51335483/flutter-keyboard-makes-textfield-hide
+    return LoginForm();
     return Scaffold(
       appBar: AppBar(
         title: Text('Sustainable Citizen'),
@@ -132,7 +136,13 @@ class LoginFormState extends State<LoginForm>
       ],
     );
 
+
+
+
+
     // Build a Form widget using the _formKey we created above
-    return Scaffold(appBar: null, key: _scaffoldKey, body: loginForm);
+    return Scaffold(appBar: AppBar(
+      title: Text('Sustainable Citizen'),
+    ), key: _scaffoldKey, body: Padding(padding: const EdgeInsets.all(16.0), child: loginForm));
   }
 }
