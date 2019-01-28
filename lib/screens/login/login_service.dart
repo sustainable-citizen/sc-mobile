@@ -1,8 +1,8 @@
-//import '../../data/rest_ds.dart';
-import '../../data/oauth2.dart';
+import '../../data/api.dart';
+import '../../models/user.dart';
 
 abstract class LoginContract {
-  void onLoginSuccess();
+  void onLoginSuccess(User user);
   void onLoginError(String errorTxt);
 }
 
@@ -12,11 +12,12 @@ class LoginService {
   LoginService(this._view);
 
   attemptLogin(String username, String password) async {
+    User user;
     try {
-      var response = await _api.login(username, password);
-      _view.onLoginSuccess();
-    } on Exception catch (error) {
-      _view.onLoginError(error.toString());
+      user = await _api.login(username, password);
+      _view.onLoginSuccess(user);
+    } on Exception {
+      _view.onLoginError("Oops. Something went wrong. Please try again.");
     }
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../auth.dart';
-import '../../models/user.dart';
 import 'login_service.dart';
+import '../../models/user.dart';
+import '../navigation.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -31,18 +31,16 @@ class LoginForm extends StatefulWidget {
 // Define a corresponding State class. This class will hold the data related to
 // the form.
 class LoginFormState extends State<LoginForm>
-    implements LoginContract, AuthStateListener {
-  BuildContext _context;
+    implements LoginContract {
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>(); // Used to validate the form
   final _scaffoldKey = GlobalKey<ScaffoldState>(); // Used to show the snack bar
   String _username, _password;
+  User user;
   LoginService _service;
 
   LoginFormState() {
     _service = LoginService(this);
-    var authStateProvider = AuthStateProvider();
-    authStateProvider.subscribe(this);
   }
 
   void _submit() {
@@ -60,27 +58,25 @@ class LoginFormState extends State<LoginForm>
   }
 
   @override
-  onAuthStateChanged(AuthState state) {
-    if (state == AuthState.LOGGED_IN)
-      Navigator.of(_context).pushReplacementNamed("/home");
-  }
-
-  @override
   void onLoginError(String errorTxt) {
     _showSnackBar(errorTxt);
     setState(() => _isLoading = false);
   }
 
   @override
-  void onLoginSuccess() async {
+  void onLoginSuccess(User user) async {
+    this.user = user;
     setState(() => _isLoading = false);
-    var authStateProvider = AuthStateProvider();
-    authStateProvider.notify(AuthState.LOGGED_IN);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NavigationScreen(user: this.user)
+      )
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    _context = context;
 
     // The button which is pressed to attempt login
     final loginButton = RaisedButton(
