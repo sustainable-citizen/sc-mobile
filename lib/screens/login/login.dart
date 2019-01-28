@@ -11,12 +11,7 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Sustainable Citizen'),
-      ),
-      body: Padding(padding: const EdgeInsets.all(16.0), child: LoginForm()),
-    );
+    return LoginForm();
   }
 }
 
@@ -133,6 +128,8 @@ class LoginFormState extends State<LoginForm>
     );
 
     // Build a Form widget using the _formKey we created above
-    return Scaffold(appBar: null, key: _scaffoldKey, body: loginForm);
+    return Scaffold(appBar: AppBar(
+      title: Text('Sustainable Citizen'),
+    ), key: _scaffoldKey, body: Padding(padding: const EdgeInsets.all(16.0), child: loginForm));
   }
 }
