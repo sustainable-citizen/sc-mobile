@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'challenges/challenges.dart';
 import 'home/home.dart';
 import 'profile/profile.dart';
+import '../models/user.dart';
 
-class HomeScreen extends StatefulWidget {
+class NavigationScreen extends StatefulWidget {
+  final User user;
+
+  const NavigationScreen({Key key, @required this.user});
+
   @override
-  State createState() => HomeScreenState();
+  State createState() => NavigationScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen> {
+class NavigationScreenState extends State<NavigationScreen> {
   int _currentIndex = 0;
-  final List<Widget> _children = [
-    HomeWidget(),
-    ChallengeScreen(),
-    ProfileWidget()
-  ];
 
   void onTabTapped(int index) {
     setState(() {
@@ -24,6 +24,13 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
+    List<Widget> _children = [
+      HomeWidget(),
+      ChallengeScreen(),
+      ProfileWidget(user: widget.user)
+    ];
+
     return Scaffold(
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(

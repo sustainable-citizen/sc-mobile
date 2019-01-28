@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../auth.dart';
+import 'login_service.dart';
 import '../../models/user.dart';
-import 'login_presenter.dart';
+import '../navigation.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,16 +9,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  bool _isLoading = false;
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Sustainable Citizen'),
-      ),
-      body: Padding(padding: const EdgeInsets.all(16.0), child: LoginForm()),
-    );
+    return LoginForm();
   }
 }
 
@@ -33,18 +26,16 @@ class LoginForm extends StatefulWidget {
 // Define a corresponding State class. This class will hold the data related to
 // the form.
 class LoginFormState extends State<LoginForm>
-    implements LoginContract, AuthStateListener {
-  BuildContext _context;
+    implements LoginContract {
   bool _isLoading = false;
-  final _formKey = GlobalKey<FormState>();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _formKey = GlobalKey<FormState>(); // Used to validate the form
+  final _scaffoldKey = GlobalKey<ScaffoldState>(); // Used to show the snack bar
   String _username, _password;
-  LoginPresenter _presenter;
+  User user;
+  LoginService _service;
 
   LoginFormState() {
-    _presenter = LoginPresenter(this);
-    var authStateProvider = AuthStateProvider();
-    authStateProvider.subscribe(this);
+    _service = LoginService(this);
   }
 
   void _submit() {
@@ -53,23 +44,34 @@ class LoginFormState extends State<LoginForm>
     if (form.validate()) {
       setState(() => _isLoading = true);
       form.save();
-      _presenter.attemptLogin(_username, _password);
+      _service.attemptLogin(_username, _password);
     }
   }
 
   void _showSnackBar(String text) {
-    scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(text)));
+    _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text(text)));
   }
 
   @override
-  onAuthStateChanged(AuthState state) {
-    if (state == AuthState.LOGGED_IN)
-      Navigator.of(_context).pushReplacementNamed("/home");
+  void onLoginError(String errorTxt) {
+    _showSnackBar(errorTxt);
+    setState(() => _isLoading = false);
+  }
+
+  @override
+  void onLoginSuccess(User user) async {
+    this.user = user;
+    setState(() => _isLoading = false);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NavigationScreen(user: this.user)
+      )
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    _context = context;
 
     // The button which is pressed to attempt login
     final loginButton = RaisedButton(
@@ -126,20 +128,8 @@ class LoginFormState extends State<LoginForm>
     );
 
     // Build a Form widget using the _formKey we created above
-    return Scaffold(appBar: null, key: scaffoldKey, body: loginForm);
-  }
-
-  @override
-  void onLoginError(String errorTxt) {
-    _showSnackBar(errorTxt);
-    setState(() => _isLoading = false);
-  }
-
-  @override
-  void onLoginSuccess(User user) async {
-    _showSnackBar(user.toString());
-    setState(() => _isLoading = false);
-    var authStateProvider = AuthStateProvider();
-    authStateProvider.notify(AuthState.LOGGED_IN);
+    return Scaffold(appBar: AppBar(
+      title: Text('Sustainable Citizen'),
+    ), key: _scaffoldKey, body: Padding(padding: const EdgeInsets.all(16.0), child: loginForm));
   }
 }
