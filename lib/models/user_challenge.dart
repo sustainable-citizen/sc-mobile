@@ -13,12 +13,6 @@ class UserChallenge {
     this.statusId = obj["status_id"];
   }
 
-  UserChallenge.fromJson(Map<String, dynamic> json) 
-    : id = json['id'],
-      userId = json['user_id'],
-      challengeId = json['challenge_id'],
-      statusId = json['challenge_id'];
-
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
     map["id"] = id;
