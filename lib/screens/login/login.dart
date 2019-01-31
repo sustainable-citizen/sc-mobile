@@ -80,20 +80,22 @@ class LoginFormState extends State<LoginForm>
       color: Colors.green,
     );
 
-    // The form feild where the email will be entered
+    // The form field where the email will be entered
     final emailField = Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         decoration: InputDecoration(labelText: "Email"),
         onSaved: (val) => _username = val,
+        //improve UX for email input
+        keyboardType: TextInputType.emailAddress,
         validator: (val) {
           return val.length == 0 ? "Please enter an email address" : null;
         },
       ),
     );
 
-    // The form feild where the password will be entered
-    final passwordFeild = Padding(
+    // The form field where the password will be entered
+    final passwordField = Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         decoration: InputDecoration(labelText: "Password"),
@@ -117,7 +119,7 @@ class LoginFormState extends State<LoginForm>
           child: Column(
             children: <Widget>[
               emailField,
-              passwordFeild,
+              passwordField,
             ],
           ),
         ),
