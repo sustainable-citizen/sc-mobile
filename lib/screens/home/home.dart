@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 
 class HomeWidget extends StatelessWidget {
   @override
+
+  static const IconData arrow_downward = IconData(0xe5db, fontFamily: 'MaterialIcons');
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -29,10 +32,11 @@ class HomeWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Text(
-                "\nCheck out your challenges to get started.Make sure you record when you complete them!",
+                "\nCheck out your challenges to get started.Make sure you record when you complete them!\n",
                 textScaleFactor: 1.5,
                 textAlign: TextAlign.center,
-              )
+              ),
+              new Icon(arrow_downward),
             ],
           ),
         ),
