@@ -1,4 +1,4 @@
-package com.example.app;
+package ca.sustainablecitizen.androidapp;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
