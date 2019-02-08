@@ -27,7 +27,7 @@ class NavigationScreenState extends State<NavigationScreen> {
     
     List<Widget> _children = [
       HomeWidget(),
-      ChallengeScreen(),
+      ChallengeScreen(user: widget.user),
       ProfileWidget(user: widget.user)
     ];
 
