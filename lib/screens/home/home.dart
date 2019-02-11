@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 
 
 class HomeWidget extends StatelessWidget {
-  @override
-
   static const IconData arrow_downward = IconData(0xe5db, fontFamily: 'MaterialIcons');
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
