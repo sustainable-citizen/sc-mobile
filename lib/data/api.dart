@@ -8,6 +8,7 @@ class RestDatasource {
   static final baseUrl = "http://ec2-13-58-184-130.us-east-2.compute.amazonaws.com:3000";
   final tokenEndpoint = Uri.parse(baseUrl + "/oauth/token");
   final idEndpoint = Uri.parse(baseUrl + "/oauth/token/info");
+  final revokeTokenEndpoint = Uri.parse(baseUrl + "/oauth/revoke");
   final userChallengeEndpoint = baseUrl + "/api/v1/user_challenge";
 
   Future<User> login(String username, String password) async {
@@ -29,6 +30,12 @@ class RestDatasource {
     }).whenComplete(client.close);
 
     return User(username, userId, credentials);
+  }
+
+  Future<User> logout(User user) async {
+    oauth2.Client client = oauth2.Client(user.credentials);
+    var response = await client.post(revokeTokenEndpoint, body: {'token': user.credentials}) ;
+    return user;
   }
 
   Future<List<UserChallenge>> getUserChallenges(User user) async {

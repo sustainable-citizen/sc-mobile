@@ -1,32 +1,37 @@
 import 'package:flutter/material.dart';
 import '../../models/user.dart';
+import 'logout_service.dart';
 
 class ProfileWidget extends StatelessWidget {
-  final User user;
-  bool _isLoading = false;
+  User user;
+  LogoutService _service = LogoutService(_view);
 
   ProfileWidget({Key key, this.user});
 
-
   void _submit() {
-    final form = _formKey.currentState;
+    _service.attemptLogout(user);
 
-    if (form.validate()) {
-      setState(() => _isLoading = true);
-      form.save();
-      //_service.attemptLogin(_username, _password);
-    }
   }
 
-  // The button which is pressed to attempt login
-  final logoutButton = RaisedButton(
-    onPressed: _submit,
-    child: Text("Logout"),
-    color: Colors.green,
-  );
+  void onLogoutSuccess(User user) async {
+    this.user = null;
+//    Navigator.pushReplacement(
+//        null,
+//        MaterialPageRoute(
+//            builder: (context) => NavigationScreen(user: this.user)
+//        )
+//    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    // The button which is pressed to attempt logout
+    final logoutButton = RaisedButton(
+      onPressed: _submit,
+      child: Text("Logout"),
+      color: Colors.green,
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(user.username),

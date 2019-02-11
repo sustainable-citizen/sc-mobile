@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'challenges/challenges.dart';
 import 'home/home.dart';
 import 'profile/profile.dart';
+import 'login/login.dart';
 import '../models/user.dart';
 
 class NavigationScreen extends StatefulWidget {
