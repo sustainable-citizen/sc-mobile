@@ -103,6 +103,7 @@ class LoginFormState extends State<LoginForm>
         validator: (val) {
           return val.length == 0 ? "Please enter an password" : null;
         },
+        obscureText: true,
       ),
     );
 
