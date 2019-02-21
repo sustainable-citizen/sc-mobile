@@ -6,6 +6,10 @@ class HomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final greenText =TextStyle(
+      color: Colors.green
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
@@ -16,24 +20,22 @@ class HomeWidget extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Text(
-                "Welcome to",
+                "Welcome Sustainable Citizen!",
                 textScaleFactor: 3.0,
                 textAlign: TextAlign.center,
+                style: greenText,
               ),
               Text(
-                "Sustainable Citizen!",
-                textScaleFactor: 4.0,
-                textAlign: TextAlign.center,
-              ),
-              Text(
-                "\nThank you for being a member of the Sustainable Citizen testing team!",
+                "\nThis app will guide you towards your sustainable goals and become an eco leader within your community!",
                 textScaleFactor: 2.0,
                 textAlign: TextAlign.center,
+                style: greenText,
               ),
               Text(
-                "\nCheck out your challenges to get started.Make sure you record when you complete them!\n",
+                "\nAre you ready for your first challenge?\n",
                 textScaleFactor: 1.5,
                 textAlign: TextAlign.center,
+                style: greenText,
               ),
               new Icon(arrow_downward),
             ],

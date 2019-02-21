@@ -125,8 +125,9 @@ class LoginFormState extends State<LoginForm>
           ),
         ),
         Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.0),
-            child: _isLoading ? CircularProgressIndicator() : loginButton),
+          padding: EdgeInsets.symmetric(vertical: 16.0),
+          child: _isLoading ? CircularProgressIndicator() : loginButton
+        ),
       ],
     );
 
