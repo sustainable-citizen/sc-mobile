@@ -17,7 +17,7 @@ class ActiveChallengeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return userChallenges == null ? loadingIndicator : Container(
+    Container challengeList = Container(
       child: ListView.builder(
         itemCount: userChallenges.length,
         itemBuilder: (context, index) {
@@ -34,5 +34,7 @@ class ActiveChallengeWidget extends StatelessWidget {
         },
       ),
     );
+
+    return userChallenges == null ? loadingIndicator : challengeList;
   }
 }
