@@ -4,6 +4,7 @@ import 'completed.dart';
 import '../../models/user.dart';
 import '../../models/user_challenge.dart';
 import '../../data/api.dart';
+import '../../constants/data_constants.dart';
 
 class ChallengeScreen extends StatefulWidget {
   final User user;
@@ -17,22 +18,32 @@ class ChallengeScreen extends StatefulWidget {
 class ChallengeScreenState extends State<ChallengeScreen> {
 
   RestDatasource _api = RestDatasource();
-  List<UserChallenge> userChallenges;
+  List<UserChallenge> activeUserChallenges;
+  List<UserChallenge> completedUserChallenges;
 
   @override
   Widget build(BuildContext context) {
 
     _api.getUserChallenges(widget.user).then((challenges) {
       if(this.mounted) {
-        setState(() => userChallenges = challenges);
+        setState(() {
+          activeUserChallenges = challenges.where(
+            (challenge) => challenge.status == ACTIVE
+          ).toList();
+          completedUserChallenges = challenges.where(
+            (challenge) => challenge.status == COMPLETED            
+          ).toList();
+        });
       }
     });
 
     List<Widget> _pages = [
       ActiveChallengeWidget(
-        userChallenges: this.userChallenges
+        activeUserChallenges: this.activeUserChallenges
       ),
-      CompletedChallengeWidget()
+      CompletedChallengeWidget(
+        completedUserChallenges: this.completedUserChallenges
+      )
     ];
 
     return DefaultTabController(

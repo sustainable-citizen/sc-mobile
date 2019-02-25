@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../../models/user_challenge.dart';
 
 class ActiveChallengeWidget extends StatelessWidget {
-  final List<UserChallenge> userChallenges;
+  final List<UserChallenge> activeUserChallenges;
 
-  ActiveChallengeWidget({Key key, this.userChallenges});
+  ActiveChallengeWidget({Key key, this.activeUserChallenges});
 
   final loadingIndicator = Column(
     children: [
@@ -18,23 +18,24 @@ class ActiveChallengeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Container challengeList = Container(
-      child: ListView.builder(
-        itemCount: userChallenges == null ? 0 : userChallenges.length,
+      child: ListView.separated(
+        separatorBuilder: (context, index) => Divider(color: Colors.black),
+        itemCount: activeUserChallenges == null ? 0 : activeUserChallenges.length,
         itemBuilder: (context, index) {
-          final challenge = userChallenges[index];
+          final challenge = activeUserChallenges[index].challenge;
           return ListTile(
             title: Text(
-              "ID: ${challenge.id}",
+              "${challenge.name}",
               style: Theme.of(context).textTheme.headline,
             ),
             subtitle: Text(
-              "challenge_id: ${challenge.challengeId}, Status: ${challenge.statusId}"
+              "${challenge.description}"
             ),
           );
         },
       ),
     );
 
-    return userChallenges == null ? loadingIndicator : challengeList;
+    return activeUserChallenges == null ? loadingIndicator : challengeList;
   }
 }
