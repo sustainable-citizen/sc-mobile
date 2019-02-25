@@ -4,8 +4,8 @@ import '../models/user_challenge.dart';
 import 'dart:convert';
 
 class RestDatasource {
-  static final baseUrl = "http://localhost:3000";
-  static final baseUrl2 = "https://api.thesci.net/";
+  static final baseUrl2 = "http://localhost:3000";
+  static final baseUrl = "https://api.thesci.net/";
   final tokenEndpoint = Uri.parse(baseUrl + "/oauth/token");
   final idEndpoint = Uri.parse(baseUrl + "/oauth/token/info");
   final userChallengeEndpoint = baseUrl + "/api/v1/user_challenge";
