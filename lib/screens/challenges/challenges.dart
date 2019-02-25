@@ -36,7 +36,7 @@ class ChallengeScreenState extends State<ChallengeScreen> {
     });
 
     List<Widget> _pages = [
-      ActiveChallengeWidget(activeUserChallenges: this.activeUserChallenges),
+      ActiveChallengeWidget(activeUserChallenges: this.activeUserChallenges, user: widget.user),
       CompletedChallengeWidget(
           completedUserChallenges: this.completedUserChallenges)
     ];

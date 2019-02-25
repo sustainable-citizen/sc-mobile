@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../models/user_challenge.dart';
 import 'challenge_details.dart';
+import '../../models/user.dart';
 
 class ActiveChallengeWidget extends StatelessWidget {
   final List<UserChallenge> activeUserChallenges;
+  final User user;
 
-  ActiveChallengeWidget({Key key, this.activeUserChallenges});
+  ActiveChallengeWidget({Key key, this.activeUserChallenges, this.user});
 
   final loadingIndicator = Column(children: [
     Padding(
@@ -17,7 +19,7 @@ class ActiveChallengeWidget extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ChallengeDetails(userChallenge: userChallenge),
+        builder: (context) => ChallengeDetails(userChallenge: userChallenge, user: user),
       ),
     );
   }
