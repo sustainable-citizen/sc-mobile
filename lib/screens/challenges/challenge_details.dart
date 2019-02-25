@@ -51,7 +51,6 @@ class ChallengeDetailsState extends State<ChallengeDetails> {
     setState(() => _isLoading = true);
     _api.updateUserChallenge(widget.user, widget.userChallenge).then((status) {
       if (status) {
-        print("Completing a challenge");
         setState(() => _isLoading = false);
       } else {
         _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("There was a problem completeing the challenge. Please contact Sustainable Citizen for assistance.")));
