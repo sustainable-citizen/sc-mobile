@@ -12,6 +12,10 @@ class ActiveChallengeWidget extends StatelessWidget {
         child: CircularProgressIndicator())
   ]);
 
+  onTapped(challenge) {
+    print("Challenge ${challenge.id} pressed");
+  }
+
   @override
   Widget build(BuildContext context) {
     Container challengeList = Container(
@@ -20,13 +24,15 @@ class ActiveChallengeWidget extends StatelessWidget {
         itemCount:
             activeUserChallenges == null ? 0 : activeUserChallenges.length,
         itemBuilder: (context, index) {
-          final challenge = activeUserChallenges[index].challenge;
+          final userChallenge = activeUserChallenges[index];
+          final challenge = userChallenge.challenge;
           return ListTile(
             title: Text(
               "${challenge.name}",
               style: Theme.of(context).textTheme.headline,
             ),
             subtitle: Text("${challenge.description}"),
+            onTap: () => onTapped(challenge)
           );
         },
       ),
