@@ -19,7 +19,7 @@ class ActiveChallengeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Container challengeList = Container(
       child: ListView.builder(
-        itemCount: userChallenges.length,
+        itemCount: userChallenges == null ? 0 : userChallenges.length,
         itemBuilder: (context, index) {
           final challenge = userChallenges[index];
           return ListTile(
