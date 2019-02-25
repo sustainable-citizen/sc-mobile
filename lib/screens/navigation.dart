@@ -24,7 +24,6 @@ class NavigationScreenState extends State<NavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     List<Widget> _children = [
       HomeWidget(),
       ChallengeScreen(user: widget.user),

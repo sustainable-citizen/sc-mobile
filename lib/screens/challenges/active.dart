@@ -6,21 +6,19 @@ class ActiveChallengeWidget extends StatelessWidget {
 
   ActiveChallengeWidget({Key key, this.activeUserChallenges});
 
-  final loadingIndicator = Column(
-    children: [
-      Padding(
+  final loadingIndicator = Column(children: [
+    Padding(
         padding: EdgeInsets.symmetric(vertical: 100.0),
-        child: CircularProgressIndicator()
-      )
-    ]
-  );
+        child: CircularProgressIndicator())
+  ]);
 
   @override
   Widget build(BuildContext context) {
     Container challengeList = Container(
       child: ListView.separated(
         separatorBuilder: (context, index) => Divider(color: Colors.black),
-        itemCount: activeUserChallenges == null ? 0 : activeUserChallenges.length,
+        itemCount:
+            activeUserChallenges == null ? 0 : activeUserChallenges.length,
         itemBuilder: (context, index) {
           final challenge = activeUserChallenges[index].challenge;
           return ListTile(
@@ -28,9 +26,7 @@ class ActiveChallengeWidget extends StatelessWidget {
               "${challenge.name}",
               style: Theme.of(context).textTheme.headline,
             ),
-            subtitle: Text(
-              "${challenge.description}"
-            ),
+            subtitle: Text("${challenge.description}"),
           );
         },
       ),

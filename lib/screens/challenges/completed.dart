@@ -6,21 +6,20 @@ class CompletedChallengeWidget extends StatelessWidget {
 
   CompletedChallengeWidget({Key key, this.completedUserChallenges});
 
-  final loadingIndicator = Column(
-    children: [
-      Padding(
+  final loadingIndicator = Column(children: [
+    Padding(
         padding: EdgeInsets.symmetric(vertical: 100.0),
-        child: CircularProgressIndicator()
-      )
-    ]
-  );
+        child: CircularProgressIndicator())
+  ]);
 
   @override
   Widget build(BuildContext context) {
     Container challengeList = Container(
       child: ListView.separated(
         separatorBuilder: (context, index) => Divider(color: Colors.black),
-        itemCount: completedUserChallenges == null ? 0 : completedUserChallenges.length,
+        itemCount: completedUserChallenges == null
+            ? 0
+            : completedUserChallenges.length,
         itemBuilder: (context, index) {
           final challenge = completedUserChallenges[index].challenge;
           return ListTile(
@@ -28,9 +27,7 @@ class CompletedChallengeWidget extends StatelessWidget {
               "${challenge.name}",
               style: Theme.of(context).textTheme.headline,
             ),
-            subtitle: Text(
-              "${challenge.description}"
-            ),
+            subtitle: Text("${challenge.description}"),
           );
         },
       ),
