@@ -10,7 +10,8 @@ class UserChallenge {
   DateTime updatedAt;
   Challenge challenge;
 
-  UserChallenge(this.id, this.userId, this.challengeId, this.status,      this.acceptDate, this.createdAt, this.updatedAt, this.challenge);
+  UserChallenge(this.id, this.userId, this.challengeId, this.status,
+      this.acceptDate, this.createdAt, this.updatedAt, this.challenge);
 
   UserChallenge.map(dynamic obj) {
     this.id = obj["id"];
@@ -39,13 +40,13 @@ class UserChallenge {
   @override
   String toString() {
     return "{ UserChallenge - " +
-      "id: $id, " +
-      "userId: $userId, " +
-      "challengeId: $challengeId " +
-      "acceptDate: $acceptDate " +
-      "createdAt: $createdAt " +
-      "updatedAt: $updatedAt " +
-      "challenge: $challenge " +
-      "}";
+        "id: $id, " +
+        "userId: $userId, " +
+        "challengeId: $challengeId " +
+        "acceptDate: $acceptDate " +
+        "createdAt: $createdAt " +
+        "updatedAt: $updatedAt " +
+        "challenge: $challenge " +
+        "}";
   }
 }

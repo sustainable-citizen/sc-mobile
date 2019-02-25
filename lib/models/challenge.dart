@@ -28,11 +28,11 @@ class Challenge {
   @override
   String toString() {
     return "{ Challenge - " +
-      "id: $id, " +
-      "name: $name, " +
-      "description: $description " +
-      "startDate: $startDate " +
-      "endDate: $endDate " +
-      "}";
+        "id: $id, " +
+        "name: $name, " +
+        "description: $description " +
+        "startDate: $startDate " +
+        "endDate: $endDate " +
+        "}";
   }
 }

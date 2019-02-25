@@ -25,8 +25,7 @@ class LoginForm extends StatefulWidget {
 
 // Define a corresponding State class. This class will hold the data related to
 // the form.
-class LoginFormState extends State<LoginForm>
-    implements LoginContract {
+class LoginFormState extends State<LoginForm> implements LoginContract {
   bool _isLoading = false;
   final _formKey = GlobalKey<FormState>(); // Used to validate the form
   final _scaffoldKey = GlobalKey<ScaffoldState>(); // Used to show the snack bar
@@ -63,16 +62,13 @@ class LoginFormState extends State<LoginForm>
     this.user = user;
     setState(() => _isLoading = false);
     Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => NavigationScreen(user: this.user)
-      )
-    );
+        context,
+        MaterialPageRoute(
+            builder: (context) => NavigationScreen(user: this.user)));
   }
 
   @override
   Widget build(BuildContext context) {
-
     // The button which is pressed to attempt login
     final loginButton = RaisedButton(
       onPressed: _submit,
@@ -125,15 +121,17 @@ class LoginFormState extends State<LoginForm>
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 16.0),
-          child: _isLoading ? CircularProgressIndicator() : loginButton
-        ),
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            child: _isLoading ? CircularProgressIndicator() : loginButton),
       ],
     );
 
     // Build a Form widget using the _formKey we created above
-    return Scaffold(appBar: AppBar(
-      title: Text('Sustainable Citizen'),
-    ), key: _scaffoldKey, body: Padding(padding: const EdgeInsets.all(16.0), child: loginForm));
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Sustainable Citizen'),
+        ),
+        key: _scaffoldKey,
+        body: Padding(padding: const EdgeInsets.all(16.0), child: loginForm));
   }
 }

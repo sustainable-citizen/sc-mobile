@@ -9,54 +9,48 @@ import '../../constants/data_constants.dart';
 class ChallengeScreen extends StatefulWidget {
   final User user;
 
-  ChallengeScreen({Key key , this.user});
+  ChallengeScreen({Key key, this.user});
 
   @override
   State createState() => ChallengeScreenState();
 }
 
 class ChallengeScreenState extends State<ChallengeScreen> {
-
   RestDatasource _api = RestDatasource();
   List<UserChallenge> activeUserChallenges;
   List<UserChallenge> completedUserChallenges;
 
   @override
   Widget build(BuildContext context) {
-
     _api.getUserChallenges(widget.user).then((challenges) {
-      if(this.mounted) {
+      if (this.mounted) {
         setState(() {
-          activeUserChallenges = challenges.where(
-            (challenge) => challenge.status == ACTIVE
-          ).toList();
-          completedUserChallenges = challenges.where(
-            (challenge) => challenge.status == COMPLETED            
-          ).toList();
+          activeUserChallenges = challenges
+              .where((challenge) => challenge.status == ACTIVE)
+              .toList();
+          completedUserChallenges = challenges
+              .where((challenge) => challenge.status == COMPLETED)
+              .toList();
         });
       }
     });
 
     List<Widget> _pages = [
-      ActiveChallengeWidget(
-        activeUserChallenges: this.activeUserChallenges
-      ),
+      ActiveChallengeWidget(activeUserChallenges: this.activeUserChallenges),
       CompletedChallengeWidget(
-        completedUserChallenges: this.completedUserChallenges
-      )
+          completedUserChallenges: this.completedUserChallenges)
     ];
 
     return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-            title: Text('Challenges'),
-            bottom:
-                TabBar(tabs: [Tab(text: "Active"), Tab(text: "Completed")])),
-        body: TabBarView(
-          children: _pages,
-        ),
-      )
-    );
+        length: 2,
+        child: Scaffold(
+          appBar: AppBar(
+              title: Text('Challenges'),
+              bottom:
+                  TabBar(tabs: [Tab(text: "Active"), Tab(text: "Completed")])),
+          body: TabBarView(
+            children: _pages,
+          ),
+        ));
   }
 }
