@@ -23,11 +23,15 @@ class ChallengeScreenState extends State<ChallengeScreen> {
   Widget build(BuildContext context) {
 
     _api.getUserChallenges(widget.user).then((challenges) {
-      userChallenges = challenges;
+      if(this.mounted) {
+        setState(() => userChallenges = challenges);
+      }
     });
 
     List<Widget> _pages = [
-      ActiveChallengeWidget(userChallenges: this.userChallenges),
+      ActiveChallengeWidget(
+        userChallenges: this.userChallenges
+      ),
       CompletedChallengeWidget()
     ];
 

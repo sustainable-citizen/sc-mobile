@@ -14,11 +14,11 @@ class NavigationScreen extends StatefulWidget {
 }
 
 class NavigationScreenState extends State<NavigationScreen> {
-  int _currentIndex = 0;
+  int _index = 0;
 
-  void onTabTapped(int index) {
+  void onTabTapped(int newIndex) {
     setState(() {
-      _currentIndex = index;
+      _index = newIndex;
     });
   }
 
@@ -32,10 +32,10 @@ class NavigationScreenState extends State<NavigationScreen> {
     ];
 
     return Scaffold(
-      body: _children[_currentIndex],
+      body: _children[_index],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
-        currentIndex: _currentIndex,
+        currentIndex: _index,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

@@ -6,9 +6,18 @@ class ActiveChallengeWidget extends StatelessWidget {
 
   ActiveChallengeWidget({Key key, this.userChallenges});
 
+  final loadingIndicator = Column(
+    children: [
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 100.0),
+        child: CircularProgressIndicator()
+      )
+    ]
+  );
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    Container challengeList = Container(
       child: ListView.builder(
         itemCount: userChallenges.length,
         itemBuilder: (context, index) {
@@ -19,11 +28,13 @@ class ActiveChallengeWidget extends StatelessWidget {
               style: Theme.of(context).textTheme.headline,
             ),
             subtitle: Text(
-              "Challenge_id: ${challenge.userId}, Status: ${challenge.statusId}"
+              "challenge_id: ${challenge.challengeId}, Status: ${challenge.statusId}"
             ),
           );
         },
       ),
     );
+
+    return userChallenges == null ? loadingIndicator : challengeList;
   }
 }
