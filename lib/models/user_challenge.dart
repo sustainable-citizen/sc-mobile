@@ -24,16 +24,15 @@ class UserChallenge {
     this.challenge = Challenge.map(obj["challenge"]);
   }
 
-  Map<String, dynamic> toMap() {
-    var map = Map<String, dynamic>();
-    map["id"] = id;
-    map["user_id"] = userId;
-    map["challenge_id"] = challengeId;
-    map["status_id"] = status;
+  Map<String, String> toMap() {
+    var map = Map<String, String>();
+    map["id"] = id.toString();
+    map["user_id"] = userId.toString();
+    map["challenge_id"] = challengeId.toString();
+    map["status_id"] = status.toString();
     map["accept_date"] = acceptDate.toString();
     map["created_at"] = createdAt.toString();
     map["update_at"] = updatedAt.toString();
-    map["challenge"] = challenge.toMap();
     return map;
   }
 

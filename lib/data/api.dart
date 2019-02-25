@@ -4,8 +4,8 @@ import '../models/user_challenge.dart';
 import 'dart:convert';
 
 class RestDatasource {
-  static final baseUrl = "http://localhost:3000";
-  static final baseUrl2 = "https://api.thesci.net/";
+  static final baseUrl2 = "http://localhost:3000";
+  static final baseUrl = "https://api.thesci.net/";
   final tokenEndpoint = Uri.parse(baseUrl + "/oauth/token");
   final idEndpoint = Uri.parse(baseUrl + "/oauth/token/info");
   final userChallengeEndpoint = baseUrl + "/api/v1/user_challenge";
@@ -40,13 +40,28 @@ class RestDatasource {
       return jsonDecode(response.body);
     }).catchError((error) {
       client.close();
+      return null;
     }).whenComplete(client.close);
     userChallenges = [];
 
-    body.forEach((challenge) {
+    if (body != null) {
+          body.forEach((challenge) {
       userChallenges.add(UserChallenge.map(challenge));
     });
-
+    }
     return userChallenges;
+  }
+
+  Future<bool> updateUserChallenge(User user, UserChallenge userChallenge) async {
+    oauth2.Client client = oauth2.Client(user.credentials);
+    var endpoint = Uri.parse(userChallengeEndpoint + "/${userChallenge.id}");
+
+    bool isSuccess = await client.put(endpoint, body: userChallenge.toMap()).then((response) {
+      return response.statusCode == 204 ? true : false;
+    }).catchError((error) {
+      client.close();
+      return false;
+    }).whenComplete(client.close);
+    return isSuccess;
   }
 }

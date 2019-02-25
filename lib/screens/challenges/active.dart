@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
 import '../../models/user_challenge.dart';
+import 'challenge_details.dart';
+import '../../models/user.dart';
 
 class ActiveChallengeWidget extends StatelessWidget {
   final List<UserChallenge> activeUserChallenges;
+  final User user;
 
-  ActiveChallengeWidget({Key key, this.activeUserChallenges});
+  ActiveChallengeWidget({Key key, this.activeUserChallenges, this.user});
 
   final loadingIndicator = Column(children: [
     Padding(
         padding: EdgeInsets.symmetric(vertical: 100.0),
         child: CircularProgressIndicator())
   ]);
+
+  viewDetails(context, userChallenge) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ChallengeDetails(userChallenge: userChallenge, user: user),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +32,15 @@ class ActiveChallengeWidget extends StatelessWidget {
         itemCount:
             activeUserChallenges == null ? 0 : activeUserChallenges.length,
         itemBuilder: (context, index) {
-          final challenge = activeUserChallenges[index].challenge;
+          final userChallenge = activeUserChallenges[index];
+          final challenge = userChallenge.challenge;
           return ListTile(
-            title: Text(
-              "${challenge.name}",
-              style: Theme.of(context).textTheme.headline,
-            ),
-            subtitle: Text("${challenge.description}"),
-          );
+              title: Text(
+                "${challenge.name}",
+                style: Theme.of(context).textTheme.headline,
+              ),
+              subtitle: Text("${challenge.description}"),
+              onTap: () => viewDetails(context, userChallenge));
         },
       ),
     );

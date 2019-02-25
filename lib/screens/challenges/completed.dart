@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/user_challenge.dart';
+import 'challenge_details.dart';
 
 class CompletedChallengeWidget extends StatelessWidget {
   final List<UserChallenge> completedUserChallenges;
@@ -12,6 +13,15 @@ class CompletedChallengeWidget extends StatelessWidget {
         child: CircularProgressIndicator())
   ]);
 
+  viewDetails(context, userChallenge) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ChallengeDetails(userChallenge: userChallenge),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Container challengeList = Container(
@@ -21,14 +31,15 @@ class CompletedChallengeWidget extends StatelessWidget {
             ? 0
             : completedUserChallenges.length,
         itemBuilder: (context, index) {
-          final challenge = completedUserChallenges[index].challenge;
+          final userChallenge = completedUserChallenges[index];
+          final challenge = userChallenge.challenge;
           return ListTile(
-            title: Text(
-              "${challenge.name}",
-              style: Theme.of(context).textTheme.headline,
-            ),
-            subtitle: Text("${challenge.description}"),
-          );
+              title: Text(
+                "${challenge.name}",
+                style: Theme.of(context).textTheme.headline,
+              ),
+              subtitle: Text("${challenge.description}"),
+              onTap: () => viewDetails(context, userChallenge));
         },
       ),
     );
