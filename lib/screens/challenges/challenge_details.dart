@@ -2,7 +2,6 @@ import '../../models/user_challenge.dart';
 import '../../models/challenge.dart';
 import 'package:flutter/material.dart';
 import '../../constants/data_constants.dart';
-import '../../data/api.dart';
 import '../../models/user.dart';
 
 class Detail extends StatelessWidget {
@@ -12,7 +11,7 @@ class Detail extends StatelessWidget {
   Detail({
     Key key,
     @required this.title,
-    @required this.body,
+    @required this.body
   });
 
   @override
@@ -33,9 +32,11 @@ class Detail extends StatelessWidget {
 class ChallengeDetails extends StatefulWidget {
   final UserChallenge userChallenge;
   final User user;
+  final Function completeUserChallenge;
 
 
-  ChallengeDetails({Key key, this.userChallenge, this.user});
+  ChallengeDetails({Key key, @required this.userChallenge, @required this.user, @required this.completeUserChallenge
+});
 
   @override
   State createState() => ChallengeDetailsState();
@@ -43,21 +44,11 @@ class ChallengeDetails extends StatefulWidget {
 
 class ChallengeDetailsState extends State<ChallengeDetails> {
   bool _isLoading = false;
-  RestDatasource _api = RestDatasource();
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  completeChallenge(context) {
-    widget.userChallenge.status = COMPLETED;
+  void completeChallenge(context) async {
     setState(() => _isLoading = true);
-    _api.updateUserChallenge(widget.user, widget.userChallenge).then((status) {
-      if (status) {
-        setState(() => _isLoading = false);
-      } else {
-        _scaffoldKey.currentState.showSnackBar(SnackBar(content: Text("There was a problem completeing the challenge. Please contact Sustainable Citizen for assistance.")));
-        setState(() => _isLoading = false);
-      }
-    }); 
-    
+    await widget.completeUserChallenge(widget.userChallenge);
+    setState(() => _isLoading = false);
   }
 
   confirmCompletion(context) {
