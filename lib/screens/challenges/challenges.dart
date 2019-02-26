@@ -21,10 +21,13 @@ class ChallengeScreenState extends State<ChallengeScreen> {
   List<UserChallenge> completedUserChallenges;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     _api.getUserChallenges(widget.user).then((challenges) {
       if (this.mounted) {
         setState(() {
+          challenges.retainWhere((challenge) =>
+              DateTime.now().compareTo(challenge.challenge.startDate) >= 0);
           activeUserChallenges = challenges
               .where((challenge) => challenge.status == ACTIVE)
               .toList();
@@ -34,9 +37,29 @@ class ChallengeScreenState extends State<ChallengeScreen> {
         });
       }
     });
+  }
 
+  Future<bool> completeUserChallenge(UserChallenge userChallenge) async {
+    userChallenge.status = COMPLETED;
+
+    bool status = await _api.updateUserChallenge(widget.user, userChallenge);
+    if (status) {
+      setState(() {
+        activeUserChallenges.removeWhere((i) => i.id == userChallenge.id);
+        completedUserChallenges.add(userChallenge);
+      });
+    }
+    return status;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     List<Widget> _pages = [
-      ActiveChallengeWidget(activeUserChallenges: this.activeUserChallenges, user: widget.user),
+      ActiveChallengeWidget(
+        activeUserChallenges: this.activeUserChallenges,
+        user: widget.user,
+        completeUserChallenge: completeUserChallenge,
+      ),
       CompletedChallengeWidget(
           completedUserChallenges: this.completedUserChallenges)
     ];
