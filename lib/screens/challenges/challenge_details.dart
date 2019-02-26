@@ -8,11 +8,7 @@ class Detail extends StatelessWidget {
   final String title;
   final String body;
 
-  Detail({
-    Key key,
-    @required this.title,
-    @required this.body
-  });
+  Detail({Key key, @required this.title, @required this.body});
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +30,11 @@ class ChallengeDetails extends StatefulWidget {
   final User user;
   final Function completeUserChallenge;
 
-
-  ChallengeDetails({Key key, @required this.userChallenge, @required this.user, @required this.completeUserChallenge
-});
+  ChallengeDetails(
+      {Key key,
+      @required this.userChallenge,
+      @required this.user,
+      @required this.completeUserChallenge});
 
   @override
   State createState() => ChallengeDetailsState();
@@ -57,7 +55,8 @@ class ChallengeDetailsState extends State<ChallengeDetails> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: new Text("Complete the Challenge?"),
-            content: new Text("This will move the challenge under the Completed tab"),
+            content: new Text(
+                "This will move the challenge under the Completed tab"),
             actions: <Widget>[
               // usually buttons at the bottom of the dialog
               FlatButton(
@@ -105,13 +104,11 @@ class ChallengeDetailsState extends State<ChallengeDetails> {
     );
 
     final progressIndicator = Padding(
-      padding: EdgeInsets.all(16.0),
-      child: CircularProgressIndicator());
+        padding: EdgeInsets.all(16.0), child: CircularProgressIndicator());
 
     if (_isLoading == true) {
       detailElements.add(progressIndicator);
-    }
-    else if (widget.userChallenge.status == ACTIVE) {
+    } else if (widget.userChallenge.status == ACTIVE) {
       detailElements.add(completeButton);
     }
 

@@ -14,12 +14,12 @@ class RestDatasource {
     oauth2.Client client;
     oauth2.Credentials credentials;
     num userId;
-    
+
     // Attempt to authenticate the user
     client = await oauth2.resourceOwnerPasswordGrant(
-    tokenEndpoint, username, password);
+        tokenEndpoint, username, password);
     credentials = client.credentials;
-    
+
     // Attempt to get the user ID
     userId = await client.get(idEndpoint).then((response) {
       Map<String, dynamic> body = jsonDecode(response.body);
@@ -45,18 +45,21 @@ class RestDatasource {
     userChallenges = [];
 
     if (body != null) {
-          body.forEach((challenge) {
-      userChallenges.add(UserChallenge.map(challenge));
-    });
+      body.forEach((challenge) {
+        userChallenges.add(UserChallenge.map(challenge));
+      });
     }
     return userChallenges;
   }
 
-  Future<bool> updateUserChallenge(User user, UserChallenge userChallenge) async {
+  Future<bool> updateUserChallenge(
+      User user, UserChallenge userChallenge) async {
     oauth2.Client client = oauth2.Client(user.credentials);
     var endpoint = Uri.parse(userChallengeEndpoint + "/${userChallenge.id}");
 
-    bool isSuccess = await client.put(endpoint, body: userChallenge.toMap()).then((response) {
+    bool isSuccess = await client
+        .put(endpoint, body: userChallenge.toMap())
+        .then((response) {
       return response.statusCode == 204 ? true : false;
     }).catchError((error) {
       client.close();

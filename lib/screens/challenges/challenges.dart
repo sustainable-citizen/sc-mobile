@@ -56,7 +56,10 @@ class ChallengeScreenState extends State<ChallengeScreen> {
   Widget build(BuildContext context) {
     List<Widget> _pages = [
       ActiveChallengeWidget(
-          activeUserChallenges: this.activeUserChallenges, user: widget.user, completeUserChallenge: completeUserChallenge,),
+        activeUserChallenges: this.activeUserChallenges,
+        user: widget.user,
+        completeUserChallenge: completeUserChallenge,
+      ),
       CompletedChallengeWidget(
           completedUserChallenges: this.completedUserChallenges)
     ];
