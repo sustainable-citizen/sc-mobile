@@ -10,10 +10,13 @@ class ProfileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(user.username),
+        title: Text("Profile"),
       ),
       body: Container(
-        color: Colors.lime,
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Text("Profile Coming Soon!"),
+        ),
       ),
     );
   }
