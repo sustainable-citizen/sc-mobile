@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../models/user_challenge.dart';
 import '../../models/challenge.dart';
-import 'package:flutter/material.dart';
 import '../../constants/data_constants.dart';
 import '../../models/user.dart';
 
@@ -87,10 +88,10 @@ class ChallengeDetailsState extends State<ChallengeDetails> {
         Detail(title: "Description", body: challenge.description);
 
     final startDate =
-        Detail(title: "Start Date", body: challenge.startDate.toString());
+        Detail(title: "Start Date", body: DateFormat.yMMMMd("en_US").add_jm().format(challenge.startDate));
 
     final endDate =
-        Detail(title: "End Date", body: challenge.endDate.toString());
+        Detail(title: "End Date", body: DateFormat.yMMMMd("en_US").add_jm().format(challenge.endDate));
 
     List<Widget> detailElements = [name, description, startDate, endDate];
 
