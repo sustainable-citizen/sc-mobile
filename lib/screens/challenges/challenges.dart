@@ -61,7 +61,9 @@ class ChallengeScreenState extends State<ChallengeScreen> {
         completeUserChallenge: completeUserChallenge,
       ),
       CompletedChallengeWidget(
-          completedUserChallenges: this.completedUserChallenges)
+          completedUserChallenges: this.completedUserChallenges,
+          user: widget.user,
+          completeUserChallenge: completeUserChallenge,)
     ];
 
     return DefaultTabController(
